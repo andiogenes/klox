@@ -28,6 +28,10 @@ class AstPrinter : Expr.Visitor<String> {
         return expr.name.lexeme
     }
 
+    override fun visitLogicalExpr(expr: Expr.Logical): String {
+        return visitBinaryExpr(Expr.Binary(expr.left, expr.operator, expr.right))
+    }
+
     override fun visitAssignExpr(expr: Expr.Assign): String {
         return parenthesize("assign", Expr.Literal(expr.name), expr.value)
     }
